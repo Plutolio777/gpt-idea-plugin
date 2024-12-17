@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>arrowdown_grey</title>
+    <g id="IDE-端插件优化" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="色彩适配" transform="translate(-1257.000000, -2316.000000)" fill="#6E6E6E" fill-rule="nonzero">
+            <g id="arrowdown_grey" transform="translate(1257.000000, 2316.000000)">
+                <rect id="Rectangle" opacity="0" x="0" y="0" width="20" height="20"></rect>
+                <path d="M9.48320313,12.419375 L5.62835938,8.68617187 C5.1240625,8.1978125 5.46976563,7.34375 6.171875,7.34375 L13.8483594,7.34375 C14.54875,7.34375 14.8952344,8.194375 14.3942188,8.68382812 L10.5725781,12.4170313 C10.2699695,12.7126048 9.78708074,12.7136437 9.48320313,12.419375 Z" id="Path"></path>
+            </g>
+        </g>
+    </g>
+</svg>
