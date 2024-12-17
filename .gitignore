@@ -40,3 +40,5 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+/src/main/resources/icons/q-gpt-safety-large-model-robot-logo-gradient.svg
+/src/main/resources/icons/icon.png
