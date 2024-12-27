@@ -1,0 +1,11 @@
+<idea-plugin>
+    <vendor>tongyi-lingma</vendor>
+<!--    <vendor email="lihua.llh@alibaba-inc.com" url="https://developer.aliyun.com/tool/cosy?channel=idea_vendor">Alibaba Cloud AI Coding Assistant</vendor>-->
+
+    <depends>com.intellij.modules.lang</depends>
+
+    <applicationListeners>
+        <listener class="cloud.jlkjy.cn.gpt.core.codestruct.impl.JavaCodeStructService"
+                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
+    </applicationListeners>
+</idea-plugin>

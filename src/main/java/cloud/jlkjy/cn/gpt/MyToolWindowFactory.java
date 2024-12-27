@@ -20,7 +20,7 @@ public class MyToolWindowFactory implements ToolWindowFactory, DumbAware {
     public void createToolWindowContent(@NotNull Project project, @NotNull ToolWindow toolWindow) {
 
         ContentFactory factory = toolWindow.getContentManager().getFactory();
-        GptCodeGenWindowPanel mapPanel = new GptCodeGenWindowPanel();
+        GptCodeGenWindowPanel mapPanel = new GptCodeGenWindowPanel(project, toolWindow);
         Content content = factory.createContent(mapPanel, "", false);
         toolWindow.getContentManager().addContent(content);
     }

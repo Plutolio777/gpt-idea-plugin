@@ -1,22 +1,34 @@
 package cloud.jlkjy.cn.gpt.ui.components;
 
+import cloud.jlkjy.cn.gpt.ui.GptCodeGenWindowPanel;
+import cloud.jlkjy.cn.gpt.ui.components.popup.PopupPanel;
 import cloud.jlkjy.cn.gpt.ui.components.textpanel.ChatTextPanel;
 import cloud.jlkjy.cn.gpt.ui.components.textpanel.RichTextPanel;
 import cloud.jlkjy.cn.gpt.utils.ColorUtil;
 import cloud.jlkjy.cn.gpt.utils.SwingUtil;
 import com.intellij.openapi.editor.colors.EditorColorsScheme;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.ui.JBColor;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.util.ui.JBUI;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+import java.awt.event.*;
 
+@Getter
+@Setter
 public class AskInputPanel extends JPanel {
+    private final Project project;
+    private final ToolWindow toolWindow;
+    private final ChatPanel chatPanel;
+    private final PopupPanel popupPanel;
     JPanel basePanel;
     RoundRectPanel inputPanel;
     RichTextPanel textArea;
@@ -26,11 +38,16 @@ public class AskInputPanel extends JPanel {
     private RichTextPanel textPanel;
     private JPanel footBarPanel;
     private HyperlinkButton hyperlinkButton;
+    private ChatReturnButton returnBtn;
 
-    public AskInputPanel() {
+    public AskInputPanel(Project project, ToolWindow toolWindow, ChatPanel chatPanel) {
+        this.project = project;
+        this.toolWindow = toolWindow;
+        this.chatPanel = chatPanel;
         setLayout(new BorderLayout());
         this.setUpBasePanel();
         this.setBorder(JBUI.Borders.customLine(ColorUtil.getEditorBackgroundColor(), 1, 0, 0, 0));
+        this.popupPanel = new PopupPanel(this.project);
     }
 
     private void setUpBasePanel() {
@@ -54,7 +71,7 @@ public class AskInputPanel extends JPanel {
 
         this.add(this.basePanel, BorderLayout.CENTER);
 
-        this.toolbarPanel = new JPanel(new BorderLayout());
+        this.toolbarPanel = new ContextTagToolPanel(project);
 
         this.inputPanel.add(this.toolbarPanel, BorderLayout.NORTH);
 
@@ -104,21 +121,31 @@ public class AskInputPanel extends JPanel {
     private void buildFootBarTools() {
         this.hyperlinkButton = new HyperlinkButton("@ 添加引用");
         this.hyperlinkButton.setBorder(JBUI.Borders.empty(0, 1));
-        this.hyperlinkButton.addActionListener(new ActionListener() {
+        this.hyperlinkButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                showPopupMenu(button);
+            public void mouseClicked(MouseEvent e) {
+                AskInputPanel.this.handleClick();
             }
         });
 
-        this.footBarPanel.add(hyperlinkButton, BorderLayout.WEST);
 
+        this.returnBtn = new ChatReturnButton();
+
+        this.footBarPanel.add(hyperlinkButton, BorderLayout.WEST);
+        this.footBarPanel.add(this.returnBtn, BorderLayout.EAST);
     }
 
     public void updateLayout() {
         revalidate();
         repaint();
     }
+
+
+    public void handleClick() {
+//        PopupPanel popupPanel = AskInputPanel.this.getChatPanel().getMainPanel().getPopupPanel();
+        popupPanel.displaySuggestPrompts("function", this.inputPanel.getLocationOnScreen(), "",  this.inputPanel);
+    }
+
 
 
 }

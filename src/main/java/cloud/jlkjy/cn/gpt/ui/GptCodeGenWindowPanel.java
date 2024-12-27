@@ -6,8 +6,14 @@ import cloud.jlkjy.cn.gpt.ui.components.ChatPanel;
 import cloud.jlkjy.cn.gpt.ui.components.DisplayIcon;
 import cloud.jlkjy.cn.gpt.ui.components.FixedHeightLabel;
 import cloud.jlkjy.cn.gpt.ui.components.TabLabel;
+import cloud.jlkjy.cn.gpt.ui.components.popup.PopupPanel;
 import cloud.jlkjy.cn.gpt.utils.ColorUtil;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.util.ui.JBUI;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -15,8 +21,12 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+@Getter
+@Setter
 public class GptCodeGenWindowPanel extends JPanel {
 
+    private final Project project;
+    private final ToolWindow toolWindow;
     private JPanel headerPanel;
     private JPanel headerContentPanel;
     private JPanel contentPanel;
@@ -32,17 +42,22 @@ public class GptCodeGenWindowPanel extends JPanel {
     private Box logginBox;
     private JLabel historySessionBtn;
     private JPanel userInfoPanel;
-    private JLabel userAvator;
+    private JLabel userAvatar;
     private JLabel userName;
     private JLabel popupIconLabel;
     private JPanel chatPanel;
 
-    public GptCodeGenWindowPanel() {
+    private PopupPanel popupPanel;
+
+    public GptCodeGenWindowPanel(Project project, ToolWindow toolWindow) {
+        this.project = project;
+        this.toolWindow = toolWindow;
         setLayout(new BorderLayout());
         this.setFont(Fonts.Default);
         this.setUpBasePanel();
         this.setUpComponents();
     }
+
 
     private void setUpBasePanel() {
 
@@ -81,7 +96,7 @@ public class GptCodeGenWindowPanel extends JPanel {
     }
 
     private void setUpChatPanel() {
-        this.chatPanel = new ChatPanel();
+        this.chatPanel = new ChatPanel(this.project, this.toolWindow, this);
         this.contentPanel.add(this.chatPanel, BorderLayout.CENTER);
     }
 
@@ -136,10 +151,10 @@ public class GptCodeGenWindowPanel extends JPanel {
 
     private void buildUserInfoPanel() {
         this.userInfoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 8, 0));
-        this.userAvator = new JLabel(Icons.DefaultAvatar);
+        this.userAvatar = new JLabel(Icons.DefaultAvatar);
         this.userName = new JLabel("liuyijun");
         this.popupIconLabel = (JLabel)new FixedHeightLabel(Icons.ArrowDown, 40);
-        this.userInfoPanel.add(userAvator);
+        this.userInfoPanel.add(userAvatar);
         this.userInfoPanel.add(userName);
         this.userInfoPanel.add(this.popupIconLabel);
         this.userInfoPanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

@@ -1,0 +1,19 @@
+<idea-plugin>
+    <vendor email="aaat@yourcompany.com" url="https://www.yourcompany.com">aaa</vendor>
+<!--    <vendor email="lihua.llh@alibaba-inc.com" url="https://developer.aliyun.com/tool/cosy?channel=idea_vendor">Alibaba Cloud AI Coding Assistant</vendor>-->
+
+    <depends>com.intellij.modules.lang</depends>
+
+<!--    <extensions defaultExtensionNs="com.intellij">-->
+<!--        <completion.contributor id="CosyCompletionContributor"-->
+<!--                                implementationClass="com.alibabacloud.intellij.cosy.completion.PythonCosyCompletionContributor"-->
+<!--                                language="Python" order="first"/>-->
+<!--        <codeInsight.inlayProvider language="Python" implementationClass="com.alibabacloud.intellij.cosy.editor.CosyPythonEditorChatHintProvider"/>-->
+<!--    </extensions>-->
+
+<!--    <applicationListeners>-->
+<!--        <listener class="com.alibabacloud.intellij.cosy.listener.MultiLangCosyProjectManagerListener"-->
+<!--                  topic="com.intellij.openapi.project.ProjectManagerListener"/>-->
+<!--    </applicationListeners>-->
+
+</idea-plugin>
